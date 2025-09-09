@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es-mx">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BNPL — Gestión + Compra (v2, sin RyC)</title>
+<link rel="stylesheet" href="bnpl_gestion_style.css">
+</head>
+<body>
+<header>
+  <h1>BNPL — Gestión + Compra (v2)</h1>
+  <span class="pill">POS siempre débito</span>
+  <span class="pill">Funding JIT (saldo + BNPL)</span>
+  <span class="pill">Default 3x • 1–12x</span>
+</header>
+
+<main>
+  <section class="section">
+    <h2>Resumen de la solución</h2>
+    <div class="grid">
+      <div class="card">
+        <b>Gestión (en la app MP)</b>
+        <ul>
+          <li>El usuario hace opt‑in, elige <b>presets de funding</b> (100% BNPL, auto‑split, fallback) y define <b>cuotas 1–12x</b> (default 3x, tasa prefijada y precio por $1,000).</li>
+          <li><b>Activa Tap MP</b> y <b>también puede usar su tarjeta de débito física</b>.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <b>Compra (in‑store)</b>
+        <ul>
+          <li>El cajero ingresa el monto y la transacción corre como <b>débito</b> en el POS.</li>
+          <li>En el backend, MP aplica el <b>preset</b> y hace <b>funding JIT</b> (top‑up de la cuenta con BNPL cuando sea necesario).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <b>Post‑compra</b>
+        <ul>
+          <li><b>Pantalla de éxito (congrats) con recibo en la app</b>.</li>
+          <li>El usuario puede <b>gestionar</b> la transacción: aumentar cuotas (ventana T+X), prepagar, adelantar cuota.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>1) Área de Gestión BNPL</h2>
+    <div class="grid">
+      <div class="phone">
+        <div class="topbar"><span>BNPL</span><span>Presets</span></div>
+        <div class="screen">
+          <div class="h1">Presets de funding</div>
+          <div class="list">
+            <div class="option"><div class="left"><span class="radio on"></span><div>100% BNPL</div></div><span class="badge">predeterminado</span></div>
+            <div class="option"><div class="left"><span class="radio"></span><div>Auto‑split saldo+BNPL</div></div><input class="slider" type="range" value="50"></div>
+            <div class="option"><div class="left"><span class="radio"></span><div>Usar BNPL si saldo insuficiente</div></div></div>
+          </div>
+          <div class="card">
+            <div class="row"><div class="h2">Regla activa</div><div>100% BNPL</div></div>
+            <div class="footer">Puedes cambiarla cuando quieras.</div>
+          </div>
+          <button class="btn">Guardar presets</button>
+        </div>
+      </div>
+
+      <div class="phone">
+        <div class="topbar"><span>BNPL</span><span>Cuotas</span></div>
+        <div class="screen">
+          <div class="h1">Precio por $1,000</div>
+          <div class="list">
+            <div class="option"><div class="left"><span class="radio"></span><div>1x</div></div><div>$ 1,000.00</div></div>
+            <div class="option"><div class="left"><span class="radio on"></span><div>3x</div></div><div>$ 1,050.00</div></div>
+            <div class="option"><div class="left"><span class="radio"></span><div>6x</div></div><div>$ 1,100.00</div></div>
+            <div class="option"><div class="left"><span class="radio"></span><div>9x</div></div><div>$ 1,180.00</div></div>
+            <div class="option"><div class="left"><span class="radio"></span><div>12x</div></div><div>$ 1,240.00</div></div>
+          </div>
+          <div class="card"><div class="row"><div class="h2">Tasa</div><div>Prefijada • mostrar CAT</div></div></div>
+          <button class="btn">Definir 3x como default</button>
+        </div>
+      </div>
+
+      <div class="phone">
+        <div class="topbar"><span>BNPL</span><span>Habilitar</span></div>
+        <div class="screen">
+          <div class="h1">Resumen de configuración</div>
+          <div class="card">
+            <div class="row"><div>Funding</div><div>100% BNPL</div></div>
+            <div class="row"><div>Cuotas default</div><div>3x</div></div>
+            <div class="row"><div>Tasa</div><div>Prefijada</div></div>
+          </div>
+          <button class="btn">Habilitar Tap MP</button>
+          <div class="footer">Todo dentro de la app de MP.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2) Compra — Versión Tap MP (celular)</h2>
+    <div class="grid4">
+      <div class="phone">
+        <div class="topbar"><span>Inicio</span><span>NFC</span></div>
+        <div class="screen">
+          <div class="h1">Acceder a NFC desde MP</div>
+          <div class="card">Saldo: <b>$ 100.00</b><br>BNPL: <b>$ 1,000.00</b></div>
+          <div class="btn secondary">Pagar con NFC</div>
+          <div class="footer">Preset aplicado automáticamente.</div>
+        </div>
+      </div>
+      <div class="phone dark">
+        <div class="topbar"><span></span><span>Tap</span></div>
+        <div class="screen">
+          <div class="tap">Acerque a la terminal</div>
+          <div class="footer">Flujo como <b>débito</b> en el POS.</div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="topbar"><span>Éxito</span><span>Recibo</span></div>
+        <div class="screen">
+          <div class="h1">Compra aprobada</div>
+          <div class="success">$ 200.00 pagados (débito en el POS).<br>Funding: $ 200.00 BNPL (preset).</div>
+          <button class="btn">Ver cronograma</button>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="topbar"><span>Post‑compra</span><span>Gestión</span></div>
+        <div class="screen">
+          <div class="h1">Gestionar transacción</div>
+          <div class="list">
+            <div class="option"><div class="left"><div class="h2">Aumentar a 6x</div></div><div class="badge">hasta T+X min</div></div>
+            <div class="option"><div class="left"><div class="h2">Prepagar</div></div><div>con saldo/transferencia</div></div>
+            <div class="option"><div class="left"><div class="h2">Adelantar cuota</div></div><div>descuento</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>3) Compra — Versión Tarjeta de Débito (física)</h2>
+    <div class="grid4">
+      <div class="phone">
+        <div class="topbar"><span>Tarjeta</span><span>Débito</span></div>
+        <div class="screen">
+          <div class="h1">Usar tarjeta de débito</div>
+          <div class="card">Tu BNPL está habilitado.<br>Preset: <b>100% BNPL</b> (3x)</div>
+          <div class="footer">No cambia la experiencia en caja.</div>
+        </div>
+      </div>
+      <div class="phone dark">
+        <div class="topbar"><span></span><span>POS</span></div>
+        <div class="screen">
+          <div class="tap">Inserta/acerca la tarjeta</div>
+          <div class="footer">Flujo débito — sin RyC.</div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="topbar"><span>Éxito</span><span>Recibo</span></div>
+        <div class="screen">
+          <div class="h1">Compra aprobada</div>
+          <div class="success">$ 200.00 pagados (débito en el POS).<br>Funding: saldo $ 100.00 + BNPL $ 100.00.</div>
+          <button class="btn">Ver cronograma</button>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="topbar"><span>Post‑compra</span><span>Gestión</span></div>
+        <div class="screen">
+          <div class="h1">Gestionar transacción</div>
+          <div class="list">
+            <div class="option"><div class="left"><div class="h2">Cambiar a 9x</div></div><div class="badge">hasta T+X min</div></div>
+            <div class="option"><div class="left"><div class="h2">Prepagar</div></div><div>saldo/transferencia</div></div>
+            <div class="option"><div class="left"><div class="h2">Ver contrato</div></div><div>PDF</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="footer"><b>Importante:</b> en el POS la operación es siempre <b>débito</b>. El split saldo+BNPL ocurre en el backend de MP según el preset. La app muestra la <b>pantalla de éxito</b> y ofrece gestión en el post‑compra.</div>
+  </section>
+</main>
+</body>
+</html>
